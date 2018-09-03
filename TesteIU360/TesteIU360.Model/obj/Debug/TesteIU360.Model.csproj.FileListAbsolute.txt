@@ -1,0 +1,14 @@
+F:\TesteIU360\TesteIU360.Model\bin\Debug\TesteIU360.Model.dll.config
+F:\TesteIU360\TesteIU360.Model\bin\Debug\TesteIU360.Model.dll
+F:\TesteIU360\TesteIU360.Model\bin\Debug\TesteIU360.Model.pdb
+F:\TesteIU360\TesteIU360.Model\bin\Debug\EntityFramework.dll
+F:\TesteIU360\TesteIU360.Model\bin\Debug\EntityFramework.SqlServer.dll
+F:\TesteIU360\TesteIU360.Model\bin\Debug\Newtonsoft.Json.dll
+F:\TesteIU360\TesteIU360.Model\bin\Debug\EntityFramework.xml
+F:\TesteIU360\TesteIU360.Model\bin\Debug\EntityFramework.SqlServer.xml
+F:\TesteIU360\TesteIU360.Model\bin\Debug\Newtonsoft.Json.xml
+F:\TesteIU360\TesteIU360.Model\obj\Debug\TesteIU360.Model.csproj.CoreCompileInputs.cache
+F:\TesteIU360\TesteIU360.Model\obj\Debug\TesteIU360.Model.csproj.CopyComplete
+F:\TesteIU360\TesteIU360.Model\obj\Debug\TesteIU360.Model.dll
+F:\TesteIU360\TesteIU360.Model\obj\Debug\TesteIU360.Model.pdb
+F:\TesteIU360\TesteIU360.Model\obj\Debug\TesteIU360.Model.csprojAssemblyReference.cache

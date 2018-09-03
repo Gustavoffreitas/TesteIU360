@@ -1,0 +1,44 @@
+﻿@model  int
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/Scripts/bootstrap.min.js")
+
+@Html.DropDownList("cboStatus",
+        new SelectList(new[] {
+        new {id=-1, description="Selecione um status"},
+        new {id=0, description="Inativo"},
+        new {id=1, description="Ativo"}
+        }, "id", "description"), new
+        {
+            @id = "cboStatus",
+            @class = "form-control"
+})
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function ()
+    {
+        $('#cboStatus').attr("data-msg", "Selecione um status.");
+        $('#hdStatus').val($("#cboStatus").val());
+        $('#cboStatus').val('@int.Parse(@Model.ToString())');
+
+    });
+
+    function confirmStatus(form) {
+
+        var selectedStatus = $('#cboStatus').val();
+
+        //form.validate().element("#cboStatus");
+
+        if (selectedStatus === '' || selectedStatus === undefined || selectedStatus === "-1") {
+            toastr.error("Escolha um status...");
+            $('#cboStatus').focus();
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+</script>

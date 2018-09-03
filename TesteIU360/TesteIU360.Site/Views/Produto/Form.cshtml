@@ -1,0 +1,50 @@
+﻿@model TesteIU360.Site.ViewModel.ProdutoViewlModel
+
+<h1>Novo Produto</h1>
+<hr />
+@using (Html.BeginForm("AddNovoProduto", "Produto",
+    FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.produto.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Partial("DropDownStatus_", -1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.produto.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.produto.Nome,
+                                   new { @class = "form-control", @placeholder = "Nome do produto" })
+                @Html.ValidationMessageFor(m => m.produto.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.produto.Preco, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.produto.Preco,
+                                   new { @class = "form-control", @placeholder = "Preço" })
+                @Html.ValidationMessageFor(m => m.produto.Preco, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "List", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+<div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

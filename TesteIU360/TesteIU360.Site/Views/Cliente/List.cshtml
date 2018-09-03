@@ -1,0 +1,69 @@
+﻿@model TesteIU360.Site.ViewModel.ClienteViewModel
+@{
+    ViewBag.Title = "Clientes Cadastrados";
+}
+
+<div class="row wrapper border-bottom page-heading">
+    <div class="col-sm-4">
+        <h2>Cliente</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Cliente<small></small> </h5>
+            </div>
+            <div class="ibox-content">
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div class="html5buttons">
+                    </div>
+                    <table class="table table-striped table-bordered table-hover dataTable">
+                        <thead>
+                            <tr>
+                                <th class="text-left">Id</th>
+                                <th class="text-left">Razão Social</th>
+                                <th class="text-left">CNPJ</th>
+                                <th class="text-left">Telefone</th>
+                                <th class="text-left">Data Cadastro</th>
+                                <th class="text-left">Vendedor</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-center">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (@Model.Clientes != null)
+                            {
+                                foreach (var item in @Model.Clientes)
+                                {
+                                    <tr>
+                                        <td class="text-left">@item.Id</td>
+                                        <td class="text-left">@item.RazaoSocial</td>
+                                        <td class="text-left">@item.Cnpj</td>
+                                        <td class="text-left">@item.Telefone</td>
+                                        <td class="text-left">@item.DataCadastro</td>
+
+                                        @if (item.IdVendedor > 0)
+                                        {
+                                            <td class="text-left">@Model.Vendedores.Where(x => x.Id.Equals(item.IdVendedor)).First().Nome</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="text-left">---</td>
+                                        }
+
+                                        <td class="text-center">@(item.Status == true ? "Ativo" : "Inativo")</td>
+                                        <td class="text-center">@Html.ActionLink("Editar", "Edit", "Cliente", new { ClienteId = item.Id }, new { @class = "btn btn-primary btn-xs" })</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                    <td class="text-center">@Html.ActionLink("Novo Cliente", "Form", "Cliente", new { @class = "btn btn-primary btn-xs" })</td>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

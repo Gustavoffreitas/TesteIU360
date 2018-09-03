@@ -1,0 +1,99 @@
+﻿@model TesteIU360.Site.ViewModel.VendedorViewModel
+
+<h1>Novo Vendedor</h1>
+<hr />
+@using (Html.BeginForm("AddNovoVendedor", "Vendedor",
+    FormMethod.Post, new { enctype = "multipart/form-data", @id = "frmVendedor" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.vendedor.Status, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Partial("DropDownStatus_", -1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.vendedor.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input name="Nome" required="required" type="text" @Html.TextBoxFor(m => m.vendedor.Nome, new { @class = "form-control", @placeholder = "Nome do Vendedor" })
+                       @Html.ValidationMessageFor(m => m.vendedor.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.vendedor.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="email" required="required" @Html.TextBoxFor(m => m.vendedor.Email, new { @class = "form-control", @placeholder = "Email" })
+                       @Html.ValidationMessageFor(m => m.vendedor.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "List", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+<div>
+</div>
+@Styles.Render("~/Content/bootstrap.css")
+
+<script src="../../Scripts/jquery-1.9.1.js" type="text/javascript"></script>
+<script src="../../Scripts/jquery.maskedinput-1.3.1.js" type="text/javascript"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/bootstrap.min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/toaster")
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+
+            $('#frmVendedor').on('submit', function (event) {
+
+                event.preventDefault();
+
+                $('#hdStatus').val($('#cboStatus').val() === 0 ? false : true);
+                
+                if (confirmStatus($("#frmVendedor"))) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Vendedor/AddNovoVendedor',
+                        data: $('#frmVendedor').serialize(),
+                        success: function (response) {
+
+                            console.log(response);
+
+                            if (response.result === "Fail") {
+                                $.toaster({ priority: 'danger', title: "Cadastro de Vendedor", message: response.msg });
+                            } else {
+
+
+                                $.toaster({ priority: 'success', title: "Cadastro de Vendedor", message: response.msg });
+
+
+                                var interval_ = setInterval(function () {
+                                    clearInterval(interval_);
+                                    window.location = response.url;
+                                }, 3000);
+                            }
+                        }
+                    });
+                }
+            });
+
+        });
+
+    </script>
+}

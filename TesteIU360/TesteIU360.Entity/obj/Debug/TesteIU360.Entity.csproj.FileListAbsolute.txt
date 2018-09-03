@@ -1,0 +1,12 @@
+F:\TesteIU360\TesteIU360.Entity\bin\Debug\TesteIU360.Entity.dll.config
+F:\TesteIU360\TesteIU360.Entity\bin\Debug\TesteIU360.Entity.dll
+F:\TesteIU360\TesteIU360.Entity\bin\Debug\TesteIU360.Entity.pdb
+F:\TesteIU360\TesteIU360.Entity\bin\Debug\EntityFramework.dll
+F:\TesteIU360\TesteIU360.Entity\bin\Debug\EntityFramework.SqlServer.dll
+F:\TesteIU360\TesteIU360.Entity\bin\Debug\EntityFramework.xml
+F:\TesteIU360\TesteIU360.Entity\bin\Debug\EntityFramework.SqlServer.xml
+F:\TesteIU360\TesteIU360.Entity\obj\Debug\TesteIU360.Entity.csprojAssemblyReference.cache
+F:\TesteIU360\TesteIU360.Entity\obj\Debug\TesteIU360.Entity.csproj.CoreCompileInputs.cache
+F:\TesteIU360\TesteIU360.Entity\obj\Debug\TesteIU360.Entity.csproj.CopyComplete
+F:\TesteIU360\TesteIU360.Entity\obj\Debug\TesteIU360.Entity.dll
+F:\TesteIU360\TesteIU360.Entity\obj\Debug\TesteIU360.Entity.pdb

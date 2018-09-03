@@ -1,0 +1,117 @@
+﻿@model TesteIU360.Site.ViewModel.ClienteViewModel
+
+@{
+    ViewBag.Title = "Editar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Editar Cliente</h1>
+<hr />
+
+@using (Html.BeginForm("AlterarCliente", "Cliente",
+    FormMethod.Post, new { enctype = "multipart/form-data", @id = "frmCliente" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.HiddenFor(m => m.Cliente.Id)
+        @Html.HiddenFor(m => m.Cliente.Status, new { @id = "hdStatus" })
+        @Html.HiddenFor(m => m.Cliente.IdVendedor, new { @id = "hdVendedorId" })
+
+        <div class="form-group">
+            <div class="col-md-10">
+                @Html.Partial("DropDownStatus_", -1)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cliente.RazaoSocial, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Cliente.RazaoSocial, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Cliente.RazaoSocial, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cliente.Cnpj, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Cliente.Cnpj, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Cliente.Cnpj, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cliente.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Cliente.Telefone, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Cliente.Telefone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-6">
+                @Html.DropDownListFor(model => model.Cliente.IdVendedor, new SelectList(@Model.Vendedores, "Id", "Nome"), "Selecione o Vendedor", new { @id = "cboVendedor", @class = "form-control", @required = "required" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar alterações" class="btn btn-success" />
+                @Html.ActionLink("Cancelar", "List", null, new { @class = "btn btn-danger" })
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#frmCliente").submit(function () {
+                if ($("#cboVendedor").val() <= 0) {
+                    toastr.warning("Escolha um vendedor");
+                    return false;
+                }
+            });
+
+            $('#frmCliente').on('submit', function (event) {
+
+                event.preventDefault();
+
+                $('#hdStatus').val($('#cboStatus').val() === 0 ? false : true);
+                $('#hdVendedorId').val($('#cboVendedor').val());
+
+                if (confirmStatus($("#frmCliente"))) {
+                    $.ajax({
+                        type: "POST",
+                        url: '/Cliente/AlterarCliente',
+                        data: $('#frmCliente').serialize(),
+                        success: function (response) {
+                            if (response.result === "Fail") {
+                                toastr.error(response.msg, "Alteração de Cliente");
+                            } else {
+
+                                toastr.success(response.msg, "Alteração de Cliente");
+
+                                var interval_ = setInterval(function () {
+                                    clearInterval(interval_);
+                                    window.location = response.url;
+                                }, 3000);
+                            }
+                        }
+                    })
+                }
+            });
+
+            $('#iTelefone').mask('(99) 99999-9999');
+
+            //validation
+            $("#frmCliente").validate();
+            $('#iNome').attr("data-msg", "Informe o nome da Razão Social");
+            $('#iCNPJ').attr("data-msg", "Informe um CNPJ");
+        });
+    </script>
+}
